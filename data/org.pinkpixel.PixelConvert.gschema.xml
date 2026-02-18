@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="pixelconvert">
+  <schema id="org.pinkpixel.PixelConvert" path="/org/pinkpixel/PixelConvert/">
+    
+    <!-- Window state -->
+    <key name="window-width" type="i">
+      <default>900</default>
+      <summary>Default window width</summary>
+    </key>
+    
+    <key name="window-height" type="i">
+      <default>650</default>
+      <summary>Default window height</summary>
+    </key>
+    
+    <key name="window-maximized" type="b">
+      <default>false</default>
+      <summary>Window maximized state</summary>
+    </key>
+    
+    <!-- Appearance -->
+    <key name="dark-mode" type="b">
+      <default>false</default>
+      <summary>Use dark color scheme</summary>
+      <description>Enable dark mode for the application</description>
+    </key>
+    
+    <!-- Default conversion settings -->
+    <key name="default-quality" type="i">
+      <range min="0" max="100"/>
+      <default>85</default>
+      <summary>Default quality setting</summary>
+      <description>Default quality/compression level for image conversions (0-100)</description>
+    </key>
+    
+    <key name="default-format" type="s">
+      <choices>
+        <choice value="png"/>
+        <choice value="jpeg"/>
+        <choice value="webp"/>
+        <choice value="avif"/>
+        <choice value="gif"/>
+        <choice value="bmp"/>
+        <choice value="tiff"/>
+        <choice value="ico"/>
+      </choices>
+      <default>"webp"</default>
+      <summary>Default output format</summary>
+    </key>
+    
+    <!-- Performance -->
+    <key name="concurrent-conversions" type="i">
+      <range min="1" max="16"/>
+      <default>4</default>
+      <summary>Concurrent conversions</summary>
+      <description>Number of images to convert simultaneously during batch processing</description>
+    </key>
+    
+    <!-- Metadata -->
+    <key name="preserve-metadata" type="b">
+      <default>true</default>
+      <summary>Preserve image metadata</summary>
+      <description>Keep EXIF, XMP, and other metadata when converting images</description>
+    </key>
+    
+    <!-- Output settings -->
+    <key name="output-naming-pattern" type="s">
+      <default>"{name}.{ext}"</default>
+      <summary>Output file naming pattern</summary>
+      <description>Pattern for naming converted files. Available: {name}, {ext}, {date}, {time}</description>
+    </key>
+    
+    <key name="overwrite-existing" type="b">
+      <default>false</default>
+      <summary>Overwrite existing files</summary>
+      <description>Automatically overwrite files if they already exist</description>
+    </key>
+    
+  </schema>
+</schemalist>

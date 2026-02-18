@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>@appid@</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>Apache-2.0</project_license>
+  
+  <name>PixelConvert</name>
+  <summary>Convert images between modern and traditional formats</summary>
+  
+  <description>
+    <p>
+      PixelConvert is a modern, high-performance image converter for Linux that supports
+      all the latest image formats including WebP, AVIF, and HEIF, as well as traditional
+      formats like PNG, JPEG, GIF, BMP, and TIFF.
+    </p>
+    <p>Features:</p>
+    <ul>
+      <li>Support for modern formats: WebP, AVIF, HEIF</li>
+      <li>Traditional formats: PNG, JPEG, GIF, BMP, TIFF, ICO</li>
+      <li>Batch conversion for processing multiple images at once</li>
+      <li>Quality and compression controls for each format</li>
+      <li>Image preview with before/after comparison</li>
+      <li>Automatic dark mode support</li>
+      <li>Clean, modern interface following GNOME design patterns</li>
+      <li>Fast parallel processing for large batches</li>
+    </ul>
+  </description>
+  
+  <launchable type="desktop-id">@appid@.desktop</launchable>
+  
+  <developer id="dev.pinkpixel">
+    <name>Pink Pixel</name>
+  </developer>
+  
+  <url type="homepage">https://pinkpixel.dev</url>
+  <url type="bugtracker">https://github.com/pinkpixel-dev/pixelconvert/issues</url>
+  <url type="donation">https://www.buymeacoffee.com/pinkpixel</url>
+  
+  <screenshots>
+    <screenshot type="default">
+      <caption>Main window with empty state</caption>
+      <image>https://raw.githubusercontent.com/pinkpixel-dev/pixelconvert/main/data/screenshots/main-window.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>Batch conversion in progress</caption>
+      <image>https://raw.githubusercontent.com/pinkpixel-dev/pixelconvert/main/data/screenshots/batch-processing.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>Preferences window</caption>
+      <image>https://raw.githubusercontent.com/pinkpixel-dev/pixelconvert/main/data/screenshots/preferences.png</image>
+    </screenshot>
+  </screenshots>
+  
+  <content_rating type="oars-1.1" />
+  
+  <releases>
+    <release version="1.0.0" date="2026-02-17">
+      <description>
+        <p>Initial release of PixelConvert</p>
+        <ul>
+          <li>Support for WebP, AVIF, HEIF, and traditional formats</li>
+          <li>Batch conversion capability</li>
+          <li>Quality controls for all formats</li>
+          <li>Image preview functionality</li>
+          <li>Modern GTK4/Libadwaita interface</li>
+        </ul>
+      </description>
+    </release>
+  </releases>
+  
+  <requires>
+    <display_length compare="ge">360</display_length>
+  </requires>
+  
+  <recommends>
+    <control>pointing</control>
+    <control>keyboard</control>
+    <control>touch</control>
+  </recommends>
+  
+  <provides>
+    <binary>pixelconvert</binary>
+  </provides>
+</component>

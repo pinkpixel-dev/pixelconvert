@@ -1,0 +1,116 @@
+app-id: org.pinkpixel.PixelConvert
+runtime: org.gnome.Platform
+runtime-version: "47"
+sdk: org.gnome.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.rust-stable
+command: pixelconvert
+
+finish-args:
+  # Display access
+  - --share=ipc
+  - --socket=fallback-x11
+  - --socket=wayland
+
+  # GPU acceleration
+  - --device=dri
+
+  # File system access
+  - --filesystem=xdg-documents
+  - --filesystem=xdg-pictures
+  - --filesystem=xdg-download
+  - --filesystem=xdg-run/gvfsd
+
+build-options:
+  append-path: /usr/lib/sdk/rust-stable/bin
+  env:
+    CARGO_HOME: /run/build/pixelconvert/cargo
+    RUSTFLAGS: --remap-path-prefix=../=
+
+modules:
+  # libwebp for WebP support
+  - name: libwebp
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DWEBP_BUILD_ANIM_UTILS=OFF
+      - -DWEBP_BUILD_CWEBP=OFF
+      - -DWEBP_BUILD_DWEBP=OFF
+      - -DWEBP_BUILD_GIF2WEBP=OFF
+      - -DWEBP_BUILD_IMG2WEBP=OFF
+      - -DWEBP_BUILD_VWEBP=OFF
+      - -DWEBP_BUILD_WEBPINFO=OFF
+      - -DWEBP_BUILD_WEBPMUX=OFF
+      - -DWEBP_BUILD_EXTRAS=OFF
+    cleanup:
+      - /share
+      - /bin
+    sources:
+      - type: archive
+        url: https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-1.4.0.tar.gz
+        sha256: 12af50c45530f0a292d39a88d952637e43fb2d4ab1883c44ae729840f7273381
+
+  # libheif for HEIF/HEIC support
+  - name: libheif
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DWITH_EXAMPLES=OFF
+      - -DWITH_GDK_PIXBUF=OFF
+    cleanup:
+      - /bin
+      - /share
+    sources:
+      - type: archive
+        url: https://github.com/strukturag/libheif/releases/download/v1.18.2/libheif-1.18.2.tar.gz
+        sha256: c4002a622bec9f519f29d84bfdc6024e33fd67953a5fb4e530eed4b5fce1319a
+
+  # dav1d for AVIF (AV1 decoder)
+  - name: dav1d
+    buildsystem: meson
+    config-opts:
+      - -Denable_tools=false
+      - -Denable_tests=false
+    cleanup:
+      - /bin
+    sources:
+      - type: archive
+        url: https://downloads.videolan.org/pub/videolan/dav1d/1.4.3/dav1d-1.4.3.tar.xz
+        sha256: 29e8a6f28f03ea96d086e2ee66149c57c44966a5a06c7e84e6fd2a49fac30cea
+
+  # rav1e for AVIF encoding
+  - name: rav1e
+    buildsystem: simple
+    build-options:
+      append-path: /usr/lib/sdk/rust-stable/bin
+      env:
+        CARGO_HOME: /run/build/rav1e/cargo
+    build-commands:
+      - cargo --offline fetch --manifest-path Cargo.toml --verbose
+      - cargo --offline build --release --lib
+      - install -Dm644 target/release/librav1e.so -t /app/lib/
+      - install -Dm644 target/release/librav1e.a -t /app/lib/
+      - install -Dm644 include/rav1e.h -t /app/include/rav1e/
+      - install -Dm644 rav1e.pc /app/lib/pkgconfig/rav1e.pc
+    cleanup:
+      - /include
+    sources:
+      - type: archive
+        url: https://github.com/xiph/rav1e/archive/v0.7.1.tar.gz
+        sha256: da7ae0df2b608e539de5d443c096e109442cdfa6c5a112e3bbf2e31d6c6b67d0
+      - rav1e-cargo-sources.json
+
+  # Main application
+  - name: pixelconvert
+    buildsystem: meson
+    config-opts:
+      - -Dprofile=default
+    build-options:
+      append-path: /usr/lib/sdk/rust-stable/bin
+      env:
+        CARGO_HOME: /run/build/pixelconvert/cargo
+    sources:
+      - type: dir
+        path: .
+      - pixelconvert-cargo-sources.json

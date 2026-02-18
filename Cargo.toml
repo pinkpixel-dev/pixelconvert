@@ -1,0 +1,44 @@
+[package]
+name = "pixelconvert"
+version = "1.0.0"
+edition = "2021"
+authors = ["Pink Pixel <admin@pinkpixel.dev>"]
+license = "Apache-2.0"
+description = "Modern image converter with support for WebP, AVIF, HEIF and traditional formats"
+homepage = "https://pinkpixel.dev"
+repository = "https://github.com/pinkpixel-dev/pixelconvert"
+
+[dependencies]
+# GTK4 and Libadwaita
+gtk4 = { version = "0.9", package = "gtk4", features = ["v4_12"] }
+libadwaita = { version = "0.7", package = "libadwaita", features = ["v1_5"] }
+glib = "0.20"
+gio = "0.20"
+
+# Image processing
+image = { version = "0.25", default-features = false, features = [
+    "png",
+    "jpeg",
+    "gif",
+    "bmp",
+    "tiff",
+    "ico",
+    "webp",
+    "avif",
+] }
+webp = "0.3"
+ravif = "0.11"
+rgb = "0.8"
+
+# Error handling
+anyhow = "1.0"
+thiserror = "1.0"
+
+# Utilities
+once_cell = "1.19"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+strip = true
