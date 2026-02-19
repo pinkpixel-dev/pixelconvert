@@ -38,7 +38,11 @@
 
 ## Screenshots
 
-_Coming soon_
+<div align="center">
+  <img src="data/screenshots/main-window.png" alt="PixelConvert main window" width="700">
+  <br><br>
+  <img src="data/screenshots/batch-processing.png" alt="Batch conversion in progress" width="700">
+</div>
 
 ## Installation
 
