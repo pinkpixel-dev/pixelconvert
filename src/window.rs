@@ -22,6 +22,8 @@ mod imp {
         pub progress_bar: gtk4::ProgressBar,
         pub status_label: gtk4::Label,
         pub is_converting: RefCell<bool>,
+        pub output_dir: RefCell<Option<std::path::PathBuf>>,
+        pub output_dir_label: gtk4::Label,
     }
 
     #[glib::object_subclass]
@@ -49,6 +51,8 @@ mod imp {
                 progress_bar: gtk4::ProgressBar::new(),
                 status_label: gtk4::Label::new(None),
                 is_converting: RefCell::new(false),
+                output_dir: RefCell::new(None),
+                output_dir_label: gtk4::Label::new(Some("Same as source")),
             }
         }
     }
@@ -166,6 +170,46 @@ mod imp {
             quality_row.add_suffix(&self.quality_scale);
             controls_group.add(&quality_row);
 
+            // Output directory row
+            let output_dir_row = adw::ActionRow::new();
+            output_dir_row.set_title("Output Directory");
+            output_dir_row.set_subtitle("Where to save converted images");
+
+            self.output_dir_label
+                .set_ellipsize(gtk4::pango::EllipsizeMode::Middle);
+            self.output_dir_label.set_max_width_chars(30);
+            self.output_dir_label.set_valign(gtk4::Align::Center);
+            self.output_dir_label.set_css_classes(&["dim-label"]);
+
+            let browse_button = gtk4::Button::with_label("Browse");
+            browse_button.set_valign(gtk4::Align::Center);
+            browse_button.set_css_classes(&["flat"]);
+            browse_button.connect_clicked(glib::clone!(
+                #[weak]
+                obj,
+                move |_| {
+                    obj.imp().pick_output_dir();
+                }
+            ));
+
+            let clear_dir_button = gtk4::Button::from_icon_name("edit-clear-symbolic");
+            clear_dir_button.set_valign(gtk4::Align::Center);
+            clear_dir_button.set_css_classes(&["flat", "circular"]);
+            clear_dir_button.set_tooltip_text(Some("Reset to same as source"));
+            clear_dir_button.connect_clicked(glib::clone!(
+                #[weak]
+                obj,
+                move |_| {
+                    *obj.imp().output_dir.borrow_mut() = None;
+                    obj.imp().output_dir_label.set_text("Same as source");
+                }
+            ));
+
+            output_dir_row.add_suffix(&self.output_dir_label);
+            output_dir_row.add_suffix(&browse_button);
+            output_dir_row.add_suffix(&clear_dir_button);
+            controls_group.add(&output_dir_row);
+
             self.main_view.append(&controls_group);
 
             // Convert button
@@ -265,6 +309,33 @@ mod imp {
             ));
 
             window.add_controller(drop_target);
+        }
+
+        fn pick_output_dir(&self) {
+            let window = self.obj();
+            let window_ref = window.upcast_ref::<gtk4::Window>();
+
+            let dialog = gtk4::FileDialog::builder()
+                .title("Select Output Directory")
+                .modal(true)
+                .build();
+
+            dialog.select_folder(
+                Some(window_ref),
+                gio::Cancellable::NONE,
+                glib::clone!(
+                    #[weak(rename_to = imp)]
+                    self,
+                    move |result| {
+                        if let Ok(folder) = result {
+                            if let Some(path) = folder.path() {
+                                imp.output_dir_label.set_text(&path.to_string_lossy());
+                                *imp.output_dir.borrow_mut() = Some(path);
+                            }
+                        }
+                    }
+                ),
+            );
         }
 
         pub fn open_file_chooser(&self) {
@@ -453,12 +524,24 @@ mod imp {
             use crate::batch::BatchJob;
             use crate::converter::ConversionOptions;
 
+            let out_dir = self.output_dir.borrow().clone();
+
             let jobs: Vec<BatchJob> = files
                 .iter()
-                .map(|path| BatchJob {
-                    input_path: path.clone(),
-                    output_path: path.with_extension(format.extension()),
-                    options: ConversionOptions { quality, format },
+                .map(|path| {
+                    let output_path = if let Some(ref dir) = out_dir {
+                        let file_stem = path.file_stem().unwrap_or_default();
+                        let mut out = dir.join(file_stem);
+                        out.set_extension(format.extension());
+                        out
+                    } else {
+                        path.with_extension(format.extension())
+                    };
+                    BatchJob {
+                        input_path: path.clone(),
+                        output_path,
+                        options: ConversionOptions { quality, format },
+                    }
                 })
                 .collect();
 

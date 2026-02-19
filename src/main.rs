@@ -123,8 +123,8 @@ fn show_about_dialog(app: &adw::Application) {
         .developer_name("PinkPixel")
         .version("1.0.0")
         .comments("A modern image conversion tool for Linux")
-        .website("https://github.com/pinkpixel/pixelconvert")
-        .issue_url("https://github.com/pinkpixel/pixelconvert/issues")
+        .website("https://github.com/pinkpixel-dev/pixelconvert")
+        .issue_url("https://github.com/pinkpixel-dev/pixelconvert/issues")
         .license_type(gtk4::License::MitX11)
         .developers(vec!["PinkPixel Team".to_string()])
         .build();
