@@ -1,7 +1,7 @@
 # PixelConvert
 
 <div align="center">
-  <img src="data/icons/org.pinkpixel.PixelConvert.svg" width="128" height="128" alt="PixelConvert Logo">
+  <img src="logo.png" width="300" height="300" alt="PixelConvert Logo">
   
   **A modern, fast, and beautiful image conversion tool for Linux**
   

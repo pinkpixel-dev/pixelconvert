@@ -1,6 +1,6 @@
 use adw::subclass::prelude::*;
 use gtk4::prelude::*;
-use gtk4::{gio, glib};
+use gtk4::{gdk, gio, glib};
 use libadwaita as adw;
 
 mod imp {
@@ -64,8 +64,15 @@ mod imp {
             obj.set_default_size(900, 650);
 
             // Create empty state status page
-            self.status_page
-                .set_icon_name(Some("image-x-generic-symbolic"));
+            const LOGO_BYTES: &[u8] =
+                include_bytes!("../data/icons/org.pinkpixel.PixelConvert.png");
+            let logo_glib_bytes = glib::Bytes::from_static(LOGO_BYTES);
+            if let Ok(texture) = gdk::Texture::from_bytes(&logo_glib_bytes) {
+                self.status_page.set_paintable(Some(&texture));
+            } else {
+                self.status_page
+                    .set_icon_name(Some("image-x-generic-symbolic"));
+            }
             self.status_page.set_title("Welcome to PixelConvert");
             self.status_page
                 .set_description(Some("Drag and drop images here or click to select files"));
