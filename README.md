@@ -213,7 +213,7 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 
 - **Issues**: [GitHub Issues](https://github.com/pinkpixel-dev/pixelconvert/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/pinkpixel-dev/pixelconvert/discussions)
-- **Website**: https://pinkpixel.org
+- **Website**: https://pinkpixel.dev
 
 ---
 
