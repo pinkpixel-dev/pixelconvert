@@ -47,7 +47,7 @@ _Coming soon_
 PixelConvert will be available on Flathub soon:
 
 ```bash
-flatpak install flathub org.pinkpixel.PixelConvert
+flatpak install flathub dev.pinkpixel.PixelConvert
 ```
 
 ### Build from Source
@@ -72,7 +72,7 @@ cd pixelconvert
 cargo build --release
 
 # Or build Flatpak locally
-flatpak-builder --user --install --force-clean build-dir org.pinkpixel.PixelConvert.yml
+flatpak-builder --user --install --force-clean build-dir dev.pinkpixel.PixelConvert.yml
 ```
 
 ## Usage

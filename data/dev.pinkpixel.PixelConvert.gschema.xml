@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="pixelconvert">
-  <schema id="org.pinkpixel.PixelConvert" path="/org/pinkpixel/PixelConvert/">
+  <schema id="dev.pinkpixel.PixelConvert" path="/dev/pinkpixel/PixelConvert/">
     
     <!-- Window state -->
     <key name="window-width" type="i">

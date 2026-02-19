@@ -6,7 +6,7 @@ project(
   license: 'Apache-2.0',
 )
 
-application_id = 'org.pinkpixel.PixelConvert'
+application_id = 'dev.pinkpixel.PixelConvert'
 prefix = get_option('prefix')
 bindir = prefix / get_option('bindir')
 datadir = prefix / get_option('datadir')

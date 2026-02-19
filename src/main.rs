@@ -10,7 +10,7 @@ use gtk4::prelude::*;
 use libadwaita as adw;
 use libadwaita::prelude::*;
 
-const APP_ID: &str = "org.pinkpixel.PixelConvert";
+const APP_ID: &str = "dev.pinkpixel.PixelConvert";
 
 fn main() -> glib::ExitCode {
     // Initialize GTK

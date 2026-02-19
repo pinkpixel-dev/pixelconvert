@@ -33,7 +33,7 @@ PixelConvert is a GTK4/Libadwaita desktop application written in Rust. It conver
 
 ### `src/main.rs` — Application Entry Point
 
-- Creates the `adw::Application` with ID `org.pinkpixel.PixelConvert`
+- Creates the `adw::Application` with ID `dev.pinkpixel.PixelConvert`
 - Registers keyboard shortcuts (`Ctrl+O`, `Ctrl+Enter`, `Ctrl+Q`, etc.)
 - Sets up application-level actions: `quit`, `about`, `shortcuts`
 - Sets up window-level actions: `open`, `convert`, `clear`
@@ -159,13 +159,13 @@ The project uses a Meson + Cargo hybrid build for Flatpak packaging:
 
 ```bash
 # Build and install locally
-flatpak-builder --user --install --force-clean build-dir org.pinkpixel.PixelConvert.yml
+flatpak-builder --user --install --force-clean build-dir dev.pinkpixel.PixelConvert.yml
 
 # Run
-flatpak run org.pinkpixel.PixelConvert
+flatpak run dev.pinkpixel.PixelConvert
 ```
 
-The manifest (`org.pinkpixel.PixelConvert.yml`) targets GNOME 47 runtime and bundles:
+The manifest (`dev.pinkpixel.PixelConvert.yml`) targets GNOME 47 runtime and bundles:
 
 - libwebp 1.4.0
 - libheif 1.18.2
@@ -176,10 +176,10 @@ The manifest (`org.pinkpixel.PixelConvert.yml`) targets GNOME 47 runtime and bun
 
 | File                                              | Purpose                                     |
 | ------------------------------------------------- | ------------------------------------------- |
-| `data/org.pinkpixel.PixelConvert.desktop.in`      | Desktop entry for app launchers             |
-| `data/org.pinkpixel.PixelConvert.metainfo.xml.in` | AppStream metadata for software centers     |
-| `data/org.pinkpixel.PixelConvert.gschema.xml`     | GSettings schema for persistent preferences |
-| `data/icons/org.pinkpixel.PixelConvert.png`       | Application icon                            |
+| `data/dev.pinkpixel.PixelConvert.desktop.in`      | Desktop entry for app launchers             |
+| `data/dev.pinkpixel.PixelConvert.metainfo.xml.in` | AppStream metadata for software centers     |
+| `data/dev.pinkpixel.PixelConvert.gschema.xml`     | GSettings schema for persistent preferences |
+| `data/icons/dev.pinkpixel.PixelConvert.png`       | Application icon                            |
 
 ## Threading Model
 

@@ -1,4 +1,4 @@
-app-id: org.pinkpixel.PixelConvert
+app-id: dev.pinkpixel.PixelConvert
 runtime: org.gnome.Platform
 runtime-version: "47"
 sdk: org.gnome.Sdk
@@ -93,6 +93,7 @@ modules:
       - install -Dm644 target/release/librav1e.a -t /app/lib/
       - install -Dm644 include/rav1e.h -t /app/include/rav1e/
       - install -Dm644 rav1e.pc /app/lib/pkgconfig/rav1e.pc
+      - install -Dm644 LICENSE -t /app/share/licenses/$FLATPAK_ID/rav1e
     cleanup:
       - /include
     sources:

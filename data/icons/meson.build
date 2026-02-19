@@ -1,4 +1,4 @@
 install_data(
-  'org.pinkpixel.PixelConvert.png',
+  'dev.pinkpixel.PixelConvert.png',
   install_dir: datadir / 'icons' / 'hicolor' / '256x256' / 'apps'
 )

@@ -2,7 +2,7 @@
 Name=PixelConvert
 Comment=Convert images between modern and traditional formats
 Exec=@bindir@/pixelconvert
-Icon=org.pinkpixel.PixelConvert
+Icon=dev.pinkpixel.PixelConvert
 Terminal=false
 Type=Application
 Categories=Graphics;Utility;GTK;

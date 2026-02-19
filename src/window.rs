@@ -69,7 +69,7 @@ mod imp {
 
             // Create empty state status page
             const LOGO_BYTES: &[u8] =
-                include_bytes!("../data/icons/org.pinkpixel.PixelConvert.png");
+                include_bytes!("../data/icons/dev.pinkpixel.PixelConvert.png");
             let logo_glib_bytes = glib::Bytes::from_static(LOGO_BYTES);
             if let Ok(texture) = gdk::Texture::from_bytes(&logo_glib_bytes) {
                 self.status_page.set_paintable(Some(&texture));

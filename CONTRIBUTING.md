@@ -84,10 +84,10 @@ cargo clippy
 sudo pacman -S flatpak-builder
 
 # Build Flatpak
-flatpak-builder --user --install --force-clean build-dir org.pinkpixel.PixelConvert.yml
+flatpak-builder --user --install --force-clean build-dir dev.pinkpixel.PixelConvert.yml
 
 # Run Flatpak
-flatpak run org.pinkpixel.PixelConvert
+flatpak run dev.pinkpixel.PixelConvert
 ```
 
 ## Coding Guidelines
@@ -145,7 +145,7 @@ pixelconvert/
 │   └── *.gschema.xml     # GSettings schema
 ├── build-aux/
 │   └── meson/            # Build scripts
-├── org.pinkpixel.PixelConvert.yml  # Flatpak manifest
+├── dev.pinkpixel.PixelConvert.yml  # Flatpak manifest
 └── meson.build           # Build configuration
 ```
 

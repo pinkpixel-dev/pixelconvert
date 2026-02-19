@@ -7,7 +7,7 @@
 - **Module structure**: Flat — all modules live directly in `src/`
 - **Error handling**: `anyhow::Result` with `.context()` for conversion; `BatchProgress::Failed` for per-job errors in batch processing
 - **Signal connections**: `glib::clone!` with `#[weak]`/`#[strong]`/`#[upgrade_or]` to prevent reference cycles
-- **Naming**: Types `PascalCase`, functions/files `snake_case`, app ID `org.pinkpixel.PixelConvert`
+- **Naming**: Types `PascalCase`, functions/files `snake_case`, app ID `dev.pinkpixel.PixelConvert`
 - **Formatting/linting**: Default `cargo fmt` and `cargo clippy` — no `rustfmt.toml` or `clippy.toml`
 
 ## Architecture
@@ -75,8 +75,8 @@ meson install -C builddir
 ### Flatpak
 
 ```bash
-flatpak-builder --user --install --force-clean build-dir org.pinkpixel.PixelConvert.yml
-flatpak run org.pinkpixel.PixelConvert
+flatpak-builder --user --install --force-clean build-dir dev.pinkpixel.PixelConvert.yml
+flatpak run dev.pinkpixel.PixelConvert
 ```
 
 - **Runtime**: `org.gnome.Platform` 47 + `org.freedesktop.Sdk.Extension.rust-stable`
@@ -109,7 +109,7 @@ flatpak run org.pinkpixel.PixelConvert
 
 - **`image` crate features are explicit** — `default-features = false`. Must add feature flags for new codecs or they silently fail
 - **Output overwrites originals** when converting to the same format extension (no guard implemented yet)
-- **GSettings schema exists but is disconnected** — `data/org.pinkpixel.PixelConvert.gschema.xml` defines keys but `preferences.rs` has no GSettings read/write calls
+- **GSettings schema exists but is disconnected** — `data/dev.pinkpixel.PixelConvert.gschema.xml` defines keys but `preferences.rs` has no GSettings read/write calls
 - **Unused deps**: `thiserror` and `once_cell` declared in `Cargo.toml` but not imported in source
 - **`#[allow(dead_code)]`** on stubs (`preferences.rs`, `preview.rs`) — these are planned v1.1 features
 - **Flatpak vendor sources** must be regenerated after any `Cargo.lock` change
@@ -118,7 +118,7 @@ flatpak run org.pinkpixel.PixelConvert
 
 | File                                              | Purpose                                     |
 | ------------------------------------------------- | ------------------------------------------- |
-| `data/org.pinkpixel.PixelConvert.desktop.in`      | Desktop entry for app launchers             |
-| `data/org.pinkpixel.PixelConvert.metainfo.xml.in` | AppStream metadata for software centers     |
-| `data/org.pinkpixel.PixelConvert.gschema.xml`     | GSettings schema for persistent preferences |
-| `data/icons/org.pinkpixel.PixelConvert.svg`       | Application icon                            |
+| `data/dev.pinkpixel.PixelConvert.desktop.in`      | Desktop entry for app launchers             |
+| `data/dev.pinkpixel.PixelConvert.metainfo.xml.in` | AppStream metadata for software centers     |
+| `data/dev.pinkpixel.PixelConvert.gschema.xml`     | GSettings schema for persistent preferences |
+| `data/icons/dev.pinkpixel.PixelConvert.png`       | Application icon                            |

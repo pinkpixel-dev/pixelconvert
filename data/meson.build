@@ -1,6 +1,6 @@
 desktop_file = configure_file(
-  input: 'org.pinkpixel.PixelConvert.desktop.in',
-  output: 'org.pinkpixel.PixelConvert.desktop',
+  input: 'dev.pinkpixel.PixelConvert.desktop.in',
+  output: 'dev.pinkpixel.PixelConvert.desktop',
   configuration: {
     'bindir': bindir,
   },
@@ -16,8 +16,8 @@ endif
 
 # AppStream metadata
 appstream_file = configure_file(
-  input: 'org.pinkpixel.PixelConvert.metainfo.xml.in',
-  output: 'org.pinkpixel.PixelConvert.metainfo.xml',
+  input: 'dev.pinkpixel.PixelConvert.metainfo.xml.in',
+  output: 'dev.pinkpixel.PixelConvert.metainfo.xml',
   configuration: {
     'appid': application_id,
   },
@@ -36,7 +36,7 @@ endif
 
 # GSettings schema
 install_data(
-  'org.pinkpixel.PixelConvert.gschema.xml',
+  'dev.pinkpixel.PixelConvert.gschema.xml',
   install_dir: datadir / 'glib-2.0' / 'schemas'
 )
 
