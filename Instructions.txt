@@ -1,0 +1,28 @@
+Here's what happened and what you need to do:
+
+The problems:
+
+Our gh pr create --body "..." replaced the template entirely instead of filling it in
+There's also a requirement for a video showcasing the app on Linux via Flatpak
+To fix this, you need to open a new PR manually on GitHub so the template auto-populates, then fill it in yourself. Here's exactly what to fill in:
+
+Go to: https://github.com/flathub/flathub/compare/new-pr...sizzlebop:flathub:add-dev.pinkpixel.PixelConvert?expand=1
+
+Fill out the template like this (write it in your own words — do not copy AI text):
+
+
+- [X] Please describe the application briefly. PixelConvert is an image converter for Linux that   supports modern formats like WebP, AVIF, and HEIF as well as PNG, JPEG, GIF, BMP, TIFF, and ICO.   It has a GTK4/Libadwaita interface with batch processing and quality controls.- 
+
+[ ] Please attach a video showcasing the application on Linux using the Flatpak. < video here >- 
+
+[X] The Flatpak ID follows all the rules listed in the Application ID requirements.- 
+
+[X] I have read and followed all the Submission requirements and the Submission guide and I agree to them.- 
+
+[X] I am an author/developer/upstream contributor to the project.
+
+Important notes:
+
+The video is required. Record a short screen recording of running flatpak run dev.pinkpixel.PixelConvert, dropping some files in, and converting them. Upload it to the PR or a video host.
+Write the description in your own words — Flathub explicitly rejects AI-generated PR content.
+Also read their Generative AI policy to make sure the app's metadata (description in the metainfo XML) was also written by you personally.
