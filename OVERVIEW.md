@@ -55,14 +55,15 @@ Uses the GTK4 `ObjectSubclass` pattern to define `PixelConvertWindow`:
 - `adw::HeaderBar` — title bar with minimize/maximize/close + hamburger menu
 - `adw::ToastOverlay` — wraps content for toast notifications
 - `gtk4::Stack` — switches between empty state (`adw::StatusPage`) and main view
-- Main view: file list (`gtk4::ListBox`), format dropdown (`gtk4::DropDown`), quality slider (`gtk4::Scale`), convert button, progress bar, status label
+- Main view: file list (`gtk4::ListBox`), format dropdown (`gtk4::DropDown`), quality slider (`gtk4::Scale`), output directory picker, convert button, progress bar, status label
 
 **Key Methods** (on `imp::PixelConvertWindow`):
 
 - `open_file_chooser()` — opens `gtk4::FileDialog` with image MIME/suffix filters
+- `pick_output_dir()` — opens `gtk4::FileDialog::select_folder()`, stores chosen path
 - `add_file(path)` — validates extension, adds to list and UI
 - `remove_file(path)` / `clear_files()` — file management
-- `start_conversion()` — builds `BatchJob`s, creates `mpsc` channel, starts polling timer, kicks off `batch::run_batch()`
+- `start_conversion()` — builds `BatchJob`s (respecting output dir), creates `mpsc` channel, starts polling timer, kicks off `batch::run_batch()`
 
 **Public wrapper** (`PixelConvertWindow`):
 
@@ -173,12 +174,12 @@ The manifest (`org.pinkpixel.PixelConvert.yml`) targets GNOME 47 runtime and bun
 
 ## Data Files
 
-| File                                              | Purpose                                                 |
-| ------------------------------------------------- | ------------------------------------------------------- |
-| `data/org.pinkpixel.PixelConvert.desktop.in`      | Desktop entry for app launchers                         |
-| `data/org.pinkpixel.PixelConvert.metainfo.xml.in` | AppStream metadata for software centers                 |
-| `data/org.pinkpixel.PixelConvert.gschema.xml`     | GSettings schema for persistent preferences             |
-| `data/icons/org.pinkpixel.PixelConvert.svg`       | Application icon (pink gradient image conversion motif) |
+| File                                              | Purpose                                     |
+| ------------------------------------------------- | ------------------------------------------- |
+| `data/org.pinkpixel.PixelConvert.desktop.in`      | Desktop entry for app launchers             |
+| `data/org.pinkpixel.PixelConvert.metainfo.xml.in` | AppStream metadata for software centers     |
+| `data/org.pinkpixel.PixelConvert.gschema.xml`     | GSettings schema for persistent preferences |
+| `data/icons/org.pinkpixel.PixelConvert.png`       | Application icon                            |
 
 ## Threading Model
 
@@ -219,7 +220,7 @@ The manifest (`org.pinkpixel.PixelConvert.yml`) targets GNOME 47 runtime and bun
 
 4. **Separate encoding crates**: While `image` handles most formats, WebP and AVIF encoding use dedicated crates (`webp`, `ravif`) for better quality and control over encoding parameters.
 
-5. **Output path convention**: Converted files are saved alongside the originals with the new extension (e.g., `photo.webp` → `photo.png`). Custom output directories are planned for v1.1.
+5. **Output path convention**: Converted files are saved alongside the originals with the new extension by default (e.g., `photo.jpg` → `photo.webp`). A custom output directory can be selected via the "Output Directory" row in Conversion Settings.
 
 ## Extending the Project
 

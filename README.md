@@ -5,7 +5,7 @@
   
   **A modern, fast, and beautiful image conversion tool for Linux**
   
-  [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+  [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
   [![Built with GTK4](https://img.shields.io/badge/Built%20with-GTK4-blue)](https://gtk.org)
   [![Rust](https://img.shields.io/badge/Rust-1.75+-orange)](https://www.rust-lang.org)
 </div>
@@ -65,7 +65,7 @@ flatpak install flathub org.pinkpixel.PixelConvert
 sudo pacman -S rust gtk4 libadwaita meson nasm
 
 # Clone the repository
-git clone https://github.com/pinkpixel/pixelconvert.git
+git clone https://github.com/pinkpixel-dev/pixelconvert.git
 cd pixelconvert
 
 # Build with Cargo
@@ -117,7 +117,7 @@ flatpak-builder --user --install --force-clean build-dir org.pinkpixel.PixelConv
   - `webp` for WebP encoding
   - `ravif` + `rav1e` for AVIF encoding
   - `rgb` for color space conversion
-- **Async Runtime**: Tokio for parallel batch processing
+- **Async Runtime**: `std::thread` + `mpsc` channels (no Tokio — GTK4 uses the GLib main loop)
 - **Build System**: Meson + Cargo
 - **Distribution**: Flatpak
 
@@ -131,7 +131,8 @@ flatpak-builder --user --install --force-clean build-dir org.pinkpixel.PixelConv
 - [x] Drag-and-drop support
 - [x] Progress tracking
 - [x] Keyboard shortcuts
-- [ ] Documentation
+- [x] Custom output directory selection
+- [x] Documentation
 - [ ] Flathub release
 
 ### Version 1.1 (Planned)
@@ -139,7 +140,6 @@ flatpak-builder --user --install --force-clean build-dir org.pinkpixel.PixelConv
 - [ ] Image preview with before/after comparison
 - [ ] Metadata preservation options
 - [ ] Image resizing capabilities
-- [ ] Custom output directory selection
 - [ ] File naming patterns
 - [ ] Preferences persistence via GSettings
 - [ ] Multi-language support
@@ -158,7 +158,7 @@ Contributions are welcome! Please feel free to submit a Pull Request. For major 
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
 
 ## Credits
 
@@ -168,8 +168,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Support
 
-- **Issues**: [GitHub Issues](https://github.com/pinkpixel/pixelconvert/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/pinkpixel/pixelconvert/discussions)
+- **Issues**: [GitHub Issues](https://github.com/pinkpixel-dev/pixelconvert/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/pinkpixel-dev/pixelconvert/discussions)
 - **Website**: https://pinkpixel.org
 
 ---

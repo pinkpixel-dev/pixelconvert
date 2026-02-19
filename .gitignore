@@ -1,1 +1,36 @@
+# Rust
 /target
+Cargo.lock.bak
+**/*.rs.bk
+
+# Meson build directories
+/builddir
+/build-dir
+/_build
+
+# Flatpak build artifacts
+/.flatpak-builder
+/repo
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment / secrets
+.env
+.env.local
+
+# Generated / compiled data
+/data/icons/*.png.h
+*.gschema.compiled
+
+# OS
+Thumbs.db
+
+# Other
+02-requirements.md
+05-subsmission.md

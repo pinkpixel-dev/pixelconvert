@@ -54,15 +54,16 @@
   <content_rating type="oars-1.1" />
   
   <releases>
-    <release version="1.0.0" date="2026-02-17">
+    <release version="1.0.0" date="2026-02-18">
       <description>
         <p>Initial release of PixelConvert</p>
         <ul>
-          <li>Support for WebP, AVIF, HEIF, and traditional formats</li>
-          <li>Batch conversion capability</li>
+          <li>Support for PNG, JPEG, WebP, AVIF, GIF, BMP, TIFF, and ICO formats</li>
+          <li>Batch conversion with parallel processing</li>
           <li>Quality controls for all formats</li>
-          <li>Image preview functionality</li>
-          <li>Modern GTK4/Libadwaita interface</li>
+          <li>Custom output directory selection</li>
+          <li>Drag-and-drop file support</li>
+          <li>Modern GTK4/Libadwaita interface with dark mode support</li>
         </ul>
       </description>
     </release>
