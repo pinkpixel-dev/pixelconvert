@@ -59,11 +59,48 @@ flatpak install flathub dev.pinkpixel.PixelConvert
 - Libadwaita (1.5+)
 - Meson build system
 - NASM (for AVIF/rav1e compilation)
+- pkg-config
+
+#### Install dependencies
+
+**Arch Linux / CachyOS / Manjaro**
 
 ```bash
-# Install build dependencies (Arch Linux)
-sudo pacman -S rust gtk4 libadwaita meson nasm
+sudo pacman -S rust gtk4 libadwaita meson nasm pkgconf
+```
 
+**Ubuntu 24.04+ / Debian Bookworm+**
+
+```bash
+sudo apt install rustup libgtk-4-dev libadwaita-1-dev meson nasm pkg-config
+rustup default stable
+```
+
+**Fedora 40+**
+
+```bash
+sudo dnf install rust cargo gtk4-devel libadwaita-devel meson nasm pkg-config
+```
+
+**openSUSE Tumbleweed**
+
+```bash
+sudo zypper install rust cargo gtk4-devel libadwaita-devel meson nasm pkg-config
+```
+
+**NixOS**
+
+```nix
+# shell.nix or devShell
+{ pkgs ? import <nixpkgs> {} }:
+pkgs.mkShell {
+  buildInputs = with pkgs; [ rustup gtk4 libadwaita meson nasm pkg-config ];
+}
+```
+
+#### Build
+
+```bash
 # Clone the repository
 git clone https://github.com/pinkpixel-dev/pixelconvert.git
 cd pixelconvert
@@ -71,8 +108,10 @@ cd pixelconvert
 # Build with Cargo
 cargo build --release
 
-# Or build Flatpak locally
-flatpak-builder --user --install --force-clean build-dir dev.pinkpixel.PixelConvert.yml
+# Or build and install via Meson
+meson setup builddir
+meson compile -C builddir
+meson install -C builddir
 ```
 
 ## Usage
