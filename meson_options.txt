@@ -1,0 +1,1 @@
+option('profile', type: 'string', value: 'default', description: 'Build profile: "default" for release, anything else for debug')

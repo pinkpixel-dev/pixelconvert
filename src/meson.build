@@ -1,6 +1,6 @@
 cargo_sources = files(
-  'Cargo.toml',
-  'Cargo.lock',
+  '../Cargo.toml',
+  '../Cargo.lock',
 )
 
 cargo_options = [ '--manifest-path', meson.project_source_root() / 'Cargo.toml' ]
@@ -15,7 +15,7 @@ else
   message('Building in debug mode')
 endif
 
-cargo_env = [ 'CARGO_HOME=' + meson.project_build_root() / 'cargo-home' ]
+cargo_options += [ '--offline' ]
 
 cargo_build = custom_target(
   'cargo-build',
@@ -26,8 +26,6 @@ cargo_build = custom_target(
   install: true,
   install_dir: bindir,
   command: [
-    'env',
-    cargo_env,
     'cargo', 'build',
     cargo_options,
     '&&',

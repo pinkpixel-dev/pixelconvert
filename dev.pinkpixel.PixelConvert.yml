@@ -64,7 +64,7 @@ modules:
     sources:
       - type: archive
         url: https://github.com/strukturag/libheif/releases/download/v1.18.2/libheif-1.18.2.tar.gz
-        sha256: c4002a622bec9f519f29d84bfdc6024e33fd67953a5fb4e530eed4b5fce1319a
+        sha256: c4002a622bec9f519f29d84bfdc6024e33fd67953a5fb4dc2c2f11f67d5e45bf
 
   # dav1d for AVIF (AV1 decoder)
   - name: dav1d
@@ -77,36 +77,11 @@ modules:
     sources:
       - type: archive
         url: https://downloads.videolan.org/pub/videolan/dav1d/1.4.3/dav1d-1.4.3.tar.xz
-        sha256: 29e8a6f28f03ea96d086e2ee66149c57c44966a5a06c7e84e6fd2a49fac30cea
-
-  # rav1e for AVIF encoding
-  - name: rav1e
-    buildsystem: simple
-    build-options:
-      append-path: /usr/lib/sdk/rust-stable/bin
-      env:
-        CARGO_HOME: /run/build/rav1e/cargo
-    build-commands:
-      - cargo --offline fetch --manifest-path Cargo.toml --verbose
-      - cargo --offline build --release --lib
-      - install -Dm644 target/release/librav1e.so -t /app/lib/
-      - install -Dm644 target/release/librav1e.a -t /app/lib/
-      - install -Dm644 include/rav1e.h -t /app/include/rav1e/
-      - install -Dm644 rav1e.pc /app/lib/pkgconfig/rav1e.pc
-      - install -Dm644 LICENSE -t /app/share/licenses/$FLATPAK_ID/rav1e
-    cleanup:
-      - /include
-    sources:
-      - type: archive
-        url: https://github.com/xiph/rav1e/archive/v0.7.1.tar.gz
-        sha256: da7ae0df2b608e539de5d443c096e109442cdfa6c5a112e3bbf2e31d6c6b67d0
-      - rav1e-cargo-sources.json
+        sha256: 42fe524bcc82ea3a830057178faace22923a79bad3d819a4962d8cfc54c36f19
 
   # Main application
   - name: pixelconvert
     buildsystem: meson
-    config-opts:
-      - -Dprofile=default
     build-options:
       append-path: /usr/lib/sdk/rust-stable/bin
       env:
