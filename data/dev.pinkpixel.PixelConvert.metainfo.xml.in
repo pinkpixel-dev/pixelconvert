@@ -33,6 +33,7 @@
   </developer>
   
   <url type="homepage">https://pinkpixel.dev</url>
+  <url type="vcs-browser">https://github.com/pinkpixel-dev/pixelconvert</url>
   <url type="bugtracker">https://github.com/pinkpixel-dev/pixelconvert/issues</url>
   <url type="donation">https://www.buymeacoffee.com/pinkpixel</url>
   
