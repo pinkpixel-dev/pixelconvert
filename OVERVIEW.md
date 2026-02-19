@@ -165,7 +165,7 @@ flatpak-builder --user --install --force-clean build-dir dev.pinkpixel.PixelConv
 flatpak run dev.pinkpixel.PixelConvert
 ```
 
-The manifest (`dev.pinkpixel.PixelConvert.yml`) targets GNOME 47 runtime and bundles:
+The manifest (`dev.pinkpixel.PixelConvert.yml`) targets GNOME 49 runtime and bundles:
 
 - libwebp 1.4.0
 - libheif 1.18.2
